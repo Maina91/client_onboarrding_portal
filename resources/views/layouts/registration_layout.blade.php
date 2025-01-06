@@ -60,6 +60,11 @@
             font-weight: 500;
         }
 
+        .menu-item.selected {
+            border-bottom: 2px solid white;
+            /* Adjust the color and thickness as needed */
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .application-page-menu {
@@ -80,7 +85,7 @@
     <div class="flex justify-between p-4 bg-white shadow-md">
         <div class="text-black text-lg font-semibold">Client Portal</div>
         <div>
-            <button onclick="location.href='/about-us'" class="oval-btn mr-4">About Us</button>
+            <button onclick="location.href='/about'" class="oval-btn mr-4">About Us</button>
             <button onclick="location.href='/'" class="oval-btn">Login</button>
         </div>
     </div>
@@ -89,14 +94,14 @@
     <nav class="bg-blue-600 p-4 shadow-md">
         <div class="application-page-menu">
             <!-- Start Registration -->
-            <div class="menu-item">
+            <div class="menu-item {{ request()->is('register') ? 'selected' : '' }}">
                 <span class="badge text-white"><i class="fas fa-user-plus"></i></span>
                 <a href="{{ route('/register') }}" class="text-white nav-link hover:text-gray-300">Start
                     Registration</a>
             </div>
 
             <!-- Personal Information -->
-            <div class="menu-item">
+            <div class="menu-item {{ request()->is('biodata') ? 'selected' : '' }}">
                 <span class="badge text-white">
                     <i class="fas fa-id-card"></i>
                 </span>
@@ -105,7 +110,7 @@
             </div>
 
             <!-- Finalize Registration -->
-            <div class="menu-item">
+            <div class="menu-item {{ request()->is('finalize') ? 'selected' : '' }}">
                 <span class="badge text-white">
                     <i class="fas fa-check-circle"></i>
                 </span>
@@ -114,7 +119,7 @@
             </div>
 
             <!-- Make Deposit -->
-            <div class="menu-item">
+            <div class="menu-item {{ request()->is('payment') ? 'selected' : '' }}">
                 <span class="badge text-white">
                     <i class="fas fa-wallet"></i>
                 </span>
@@ -123,8 +128,14 @@
         </div>
     </nav>
 
+
     <!-- Main Content Section -->
     <div class="container mx-auto mt-10">
+
+        <div>
+            <a href="{{ url()->previous() }}" class="go-back"><i class="fa-solid fa-arrow-left"></i>GO BACK</a>
+        </div>
+
         @yield('content')
     </div>
 

@@ -5,13 +5,16 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserSignupController;
 
 
-// Route::get('/', function () {
-//     return view('home');
-// });
-
+// Home
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+// About
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 
 // Auth
 
